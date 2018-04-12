@@ -1,4 +1,3 @@
-#!/usr/bin/python
 from os import path
 from functions import generate_pwd, ssh_pwd_change, pwdPrint
 from flask import Flask, request, render_template
@@ -19,12 +18,16 @@ pwd = generate_pwd(pwdLength)
 
 app = Flask(__name__)
 
+#Create handler for the / main route un Flask
 @app.route("/", methods=['GET', 'POST'])
 def main():
+    #overwrite global wifi password pwd ADD persistence
     global pwd
+
+    #Handle post data from the form
     if request.method == 'POST' and 'generate' in request.form:
         pwd = generate_pwd(pwdLength)
-        #ssh_pwd_change(sshUser, sshIp, radio, pwd)
+        ssh_pwd_change(sshUser, sshIp, radio, pwd)
 
         if 'print' in request.form:
             pwdPrint(printerIp, radioSSID, pwd)
