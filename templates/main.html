@@ -1,0 +1,10 @@
+<!doctype html>
+<title>Guest WiFi Manager</title>
+{% if wifiPwd %}
+<ul>
+  <li>{{ wifiPwd }}</li>
+</ul>
+{% endif %}
+<form class="" action="." method="post">
+  <button id="generate" type="button" name="generate">Generate WiFi PwD</button>
+</form>
