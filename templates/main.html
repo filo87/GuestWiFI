@@ -1,10 +1,9 @@
 <!doctype html>
 <title>Guest WiFi Manager</title>
 {% if wifiPwd %}
-<ul>
-  <li>{{ wifiPwd }}</li>
-</ul>
+<p>Current password: {{ wifiPwd }}</p>
 {% endif %}
 <form class="" action="." method="post">
-  <button id="generate" type="button" name="generate">Generate WiFi PwD</button>
+  Print pwd:<input type="checkbox" name="print" value="1" checked></br>
+  <input type='submit' name="generate" value="New Password!">
 </form>
