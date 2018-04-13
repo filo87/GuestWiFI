@@ -1,13 +1,29 @@
-import os, sys
+import os, sys, datetime, shelve
 from strgen import StringGenerator as SG
 from escpos.printer import Network
-import datetime
+from settings import dbName
+
+def writePwd(pwd):
+    "Writes password to shelve db"
+    db = shelve.open(dbName)
+    db['currentPwd'] = pwd
+    db.close()
+    pass
+
+def readPwd():
+    "Reads password from shelve db"
+    db = shelve.open(dbName)
+    if 'currentPwd' in db:
+        pwd = db['currentPwd']
+    else:
+        pwd=''
+    db.close()
+    return pwd
 
 def generate_pwd(length):
-        "Creates a readable password of X characters"
-        pwd = SG("[a-kl-np-z0-9]{" + str(length) + "}").render()
-
-        return pwd
+    "Creates a readable password of X characters"
+    pwd = SG("[a-kl-np-z0-9]{" + str(length) + "}").render()
+    return pwd
 
 def ssh_pwd_change(user, ip, radio, newPwd):
     "Connect over SSH and change radio password"
@@ -27,3 +43,5 @@ def pwdPrint(ip, ssid, pwd):
     p.qr('WIFI:T:WPA;S:' + ssid +';P:' + pwd + ';;', size=6, native=False)
     p.text('Scan me to login!')
     p.cut()
+    p.close()
+    pass
