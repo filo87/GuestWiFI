@@ -48,7 +48,6 @@ class wifiPwdManager(object):
             p.qr('WIFI:T:WPA;S:' + self.radioSSID +';P:' + self.pwd + ';;', size=6, native=False)
             p.text('Scan me to login!')
             p.cut()
-            p.close()
         pass
 
     def __init__(self, sshIp, **kwargs):
