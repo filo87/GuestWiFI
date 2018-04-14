@@ -8,7 +8,7 @@
 
 import fliclib
 from settings import *
-from functions import generate_pwd, ssh_pwd_change, pwdPrint, writePwd
+from functions import wifiPwdManager
 
 client = fliclib.FlicClient(flicServer)
 
@@ -22,11 +22,16 @@ def got_info(items):
 		got_button(flicId)
 
 def change_password_and_print(channel, click_type, was_queued, time_diff):
-	global pwd
-	pwd = generate_pwd(pwdLength)
-	ssh_pwd_change(sshUser, sshIp, radioSSID, pwd)
-	writePwd(pwd)
-	pwdPrint(printerIp, radioSSID, pwd)
+	p = wifiPwdManager(sshIp,
+                        sshUser = sshUser,
+                        radioSSID = radioSSID,
+                        radioId = radioId,
+                        printerIp = printerIp,
+                        dbName = dbName)
+	p.generate(pwdLength)
+	p.sshChange()
+	p.write()
+	p.thermalPrint()
 
 if __name__ == "__main__":
 	client.get_info(got_info)

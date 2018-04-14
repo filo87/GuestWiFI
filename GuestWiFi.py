@@ -1,36 +1,44 @@
-from os import path
-import threading
+import threading, signal
 
 from flask import Flask, request, render_template
 
 from settings import *
+from functions import wifiPwdManager
 from flic_client import client, got_info
-from functions import generate_pwd, ssh_pwd_change, pwdPrint, writePwd, readPwd
 
 app = Flask(__name__)
 
 #Create handler for the / main route un Flask accepting get and post requests
 @app.route("/", methods=['GET', 'POST'])
 def main():
-    #overwrite global wifi password pwd ADD persistence
-    global pwd
+    #Create password manager object
+    p = wifiPwdManager(sshIp,
+                        sshUser = sshUser,
+                        radioSSID = radioSSID,
+                        radioId = radioId,
+                        printerIp = printerIp,
+                        dbName = dbName)
+
 
     #Handle post data from the form
     if request.method == 'POST' and 'generate' in request.form:
-        pwd = generate_pwd(pwdLength)
-        ssh_pwd_change(sshUser, sshIp, radio, pwd)
-        writePwd(pwd)
+        p.generate(pwdLength)
+        p.sshChange()
+        p.write()
 
         if 'print' in request.form:
-            pwdPrint(printerIp, radioSSID, pwd)
+            p.thermalPrint()
 
-    content = {'wifiPwd': readPwd()}
+    content = {'wifiPwd': p.pwd}
     return render_template('main.html', **content)
 
-#Subthread class for handling flic button requests
-class T(threading.Thread):
+
+#Subthread daemon for handling flic button requests
+class flicThread(threading.Thread):
     def run(self):
         client.get_info(got_info)
         client.handle_events()
 
-T().start()
+t = flicThread()
+t.daemon=True
+t.start()
