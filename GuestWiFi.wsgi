@@ -1,4 +1,4 @@
-from GuestWiFi import app as application
+from GuestWiFi import app as GuestWiFi
 
 import sys
 sys.path.insert(0, '/var/www/GuestWiFi/GuestWiFi')
