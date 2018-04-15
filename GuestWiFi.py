@@ -26,7 +26,7 @@ def main():
         p.sshChange()
         p.write()
 
-        if 'print' in request.form:
+        if request.form['print'] == "1":
             p.thermalPrint()
 
     content = {'wifiPwd': p.pwd}

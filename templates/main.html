@@ -7,22 +7,40 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 
-  <title>Guest WiFi Manager</title>
-  <div class="container">
-    <div class="col-lg-4">
-      {% if wifiPwd %}
-      <div class="input-group m-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">PWD</span>
+  <title>fZone Guest WiFi</title>
+</head>
+<body>
+
+  <div class="container my-5">
+    <h2>fZone Guest WiFi</h2>
+    <div class="row my-3">
+      <div class="col-lg-4">
+        {% if wifiPwd %}
+        <label for="wifiPassword">Current password</label>
+        <div class="input-group mb-4">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-key"></i></span>
+          </div>
+          <input type="text" id="wifiPassword" value="{{ wifiPwd }}" class="form-control" aria-label="Amount (to the nearest dollar)" readonly>
         </div>
-        <input type="text" value="{{ wifiPwd }}" class="form-control" aria-label="Amount (to the nearest dollar)" readonly>
+        {% endif %}
+        <form class="" action="." method="post">
+          <label for="wifiPassword">Print voucher</label>
+          <div class="form-group mb-4">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="print" value="1" id="option1" autocomplete="off" checked> Yes
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="print" value="0" id="option2" autocomplete="off"> No
+              </label>
+            </div>
+          </div>
+          <input class="btn btn-primary mb-2" type='submit' name="generate" value="New Password!">
+        </form>
       </div>
-      {% endif %}
-      <form class="" action="." method="post">
-        Print pwd:<input type="checkbox" name="print" value="1" checked></br>
-        <input type='submit' name="generate" value="New Password!">
-      </form>
     </div>
   </div>
 
@@ -34,5 +52,3 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </body>
 </html>
-
-<!doctype html>
