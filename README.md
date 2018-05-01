@@ -1,4 +1,4 @@
-# Project Title
+# GuestWiFi
 
 GuestWIFI is a Python flask application with flic support to automatically change the WiFi password of a guest network on a DD-Wrt access point. The app has an online webpage to manage the password, uses a flic button to initiate the password change, and integrates an ESC/POS network thermal printer to print the new generated credentials in form of a voucher.
 
@@ -20,28 +20,37 @@ fliclib
 #### Flic Server
 To use the flic button service, a flicd server is required. We use the linux version available here: [fliclib-linux-hci](https://github.com/50ButtonsEach/fliclib-linux-hci)
 
-#### DD-Wrt Router or Access Point
-Enable the ssh server on the router.
+The flicd service can be installed on the same machine or on another server such as a Raspberry pi 3.
 
-Instal ssh public key of the host running the app, so that the app can connect without password.
+#### DD-Wrt Router or Access Point
+You have to enable the ssh server on the router.
+
+You neet to install in dd-wrt the ssh public key of the host running the app, so that the app can connect without password and send commands by ssh.
 
 ### Installing Development Environment
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
+1. Set up a virtual environment with python 3 in the repo directory.
 ```
-Give the example
+virtualenv .
 ```
 
-And repeat
-
+2. Activate the virtual environment.
 ```
-until finished
+source bin/activate
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+3. install APP dependencies.
+```
+pip install -r requirements.txt
+```
+
+4. Adjust the settings in [settings.py](settings.py) according to your set-up.
+
+5. Run the development server.
+```
+python manage.py runserver
+```
+
+6. Connect to the server `http://127.0.0.1:5000`
 
 ## Deployment
 Deployment to Apache 2.4 can be achieved with the included [GuestWiFi.wsgi](GuestWiFi.wsgi) script.
