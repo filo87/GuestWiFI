@@ -1,5 +1,5 @@
-
 .DS_Store
+pwd.db
 .env
 .flaskenv
 *.pyc
