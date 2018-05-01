@@ -1,18 +1,29 @@
 # Project Title
 
-GuestWIFI is a Python flask application with flic support to automatically change the WiFi password of a guest network. The app has an online webpage to manage the password, uses a flic button to initiate the change, and integrates an ESC/POS network thermal printer to print the new generated credentials in form of a voucher.
+GuestWIFI is a Python flask application with flic support to automatically change the WiFi password of a guest network on a DD-Wrt access point. The app has an online webpage to manage the password, uses a flic button to initiate the password change, and integrates an ESC/POS network thermal printer to print the new generated credentials in form of a voucher.
 
 ## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-All required pip packages are included in the file 'requirements.txt'.
+#### WebApp
+All required pip packages are included in the file [requirements.txt](requirements.txt). The app uses:
 
 ```
-Give examples
+python 3
+flask
+python-esc-pos
+fliclib
 ```
+
+#### Flic Server
+To use the flic button service, a flicd server is required. We use the linux version available here: [fliclib-linux-hci](https://github.com/50ButtonsEach/fliclib-linux-hci)
+
+#### DD-Wrt Router or Access Point
+Enable the ssh server on the router.
+
+Instal ssh public key of the host running the app, so that the app can connect without password.
 
 ### Installing Development Environment
 
@@ -32,29 +43,8 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Deployment
-
-Add additional notes about how to deploy this on a live system
+Deployment to Apache 2.4 can be achieved with the included [GuestWiFi.wsgi](GuestWiFi.wsgi) script.
 
 ## Built With
 
@@ -68,11 +58,11 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Filippo Fontana** - *Initial work*
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
