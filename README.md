@@ -59,7 +59,6 @@ Deployment to Apache 2.4 can be achieved with the included [GuestWiFi.wsgi](Gues
 
 * [Flask](http://flask.pocoo.org) - The web framework used
 * [Apache](https://httpd.apache.org) - Web server with mod_wsgi
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Contributing
 
