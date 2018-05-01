@@ -3,7 +3,7 @@ import threading, signal
 from flask import Flask, request, render_template
 
 from settings import *
-from functions import wifiPwdManager
+from lib.functions import wifiPwdManager
 from flic_client import client, got_info
 
 app = Flask(__name__)
