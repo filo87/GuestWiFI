@@ -1,6 +1,6 @@
 # Project Title
 
-GuestWIFI is a Python flask application with flic support to automatically change the WiFi password of a guest network. The app has an online webpage to manage the password, uses a flic button to initiate the change, and integrates an ESC/POS network printer to print the new generated credentials.
+GuestWIFI is a Python flask application with flic support to automatically change the WiFi password of a guest network. The app has an online webpage to manage the password, uses a flic button to initiate the change, and integrates an ESC/POS network thermal printer to print the new generated credentials in form of a voucher.
 
 ## Getting Started
 
@@ -14,7 +14,7 @@ What things you need to install the software and how to install them
 Give examples
 ```
 
-### Installing
+### Installing Development Environment
 
 A step by step series of examples that tell you have to get a development env running
 
