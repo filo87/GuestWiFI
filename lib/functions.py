@@ -4,10 +4,10 @@ from escpos.printer import Network
 from settings import dbName
 
 class wifiPwdManager(object):
-    """Python class for managing the wifi password"""
+    """Python class for managing the wifi on DD-Wrt Router password"""
 
     def read(self):
-        "Reads password from shelve db"
+        "Reads saved password from shelve db"
         db = shelve.open(self.dbName)
         if 'currentPwd' in db:
             self.pwd = db['currentPwd']
@@ -17,7 +17,7 @@ class wifiPwdManager(object):
         return self.pwd
 
     def write(self):
-        "Writes password to shelve db"
+        "Writes and saves password to shelve db"
         db = shelve.open(self.dbName)
         db['currentPwd'] = self.pwd
         db.close()
@@ -29,7 +29,7 @@ class wifiPwdManager(object):
         return self.pwd
 
     def sshChange(self):
-        "Connects over SSH and change radio password"
+        "Connects over SSH and changes radio password"
         return os.system("ssh %s@%s 'nvram set %s_wpa_psk=%s && nvram commit && rc restart'" % (self.sshUser, self.sshIp, self.radioId, self.pwd))
 
 
